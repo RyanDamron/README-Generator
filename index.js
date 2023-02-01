@@ -1,56 +1,77 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown');
 const fs = require('fs');
 // TODO: Create an array of questions for user input
+const licenses = {
+    'MIT License': '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)',
+    'GNU GPL v2': '[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)',
+    'GNU GPL v3': '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)',
+    'Apache 2.0': '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)',
+    'BSD 2-clause': '[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)',
+    'BSD 3-clause': '[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)',
+    'GNU LGPL v3': '[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)',
+    'GNU AGPL v3': '[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)'
+
+
+  }
+
 const questions = [
         {
             type: 'input',
             message: 'What is your project title?',
             name: 'title',
         },
+        
         {
             type: 'input',
-            message: 'Enter a discription of your project',
+            message: 'Enter a description of this project:',
             name: 'description',
         },
+    
         {
             type: 'input',
-            message: 'What was your motivation?',
-            name: 'motivation',
-        },
-        {
-            type: 'input',
-            message: 'Why did you build this project?',
-            name: 'build',
-        },
-        {
-            type: 'input',
-            message: 'What problem does it solve?',
-            name: 'problems',
-        },
-        {
-            type: 'input',
-            message: 'What did you learn while making this project?',
-            name: 'learn',
-        },
-        {
-            type: 'input',
-            message: 'How do you install this project?',
+            message: 'What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running:',
             name: 'install',
         },
         {
             type: 'input',
-            message: 'How do you make contributions to this project?',
+            message: 'Provide instructions and examples for use. Include screenshots as needed:',
+            name: 'usage',
+        },
+        {
+            type: 'input',
+            message: 'List your collaborators, if any, with links to their GitHub profiles:',
+            name: 'collab',
+        },
+        {
+            type: 'input',
+            message: 'If you followed tutorials, include links to those here as well:',
+            name: 'tutorials',
+        },
+        {
+            type: 'input',
+            message: 'If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you prefer:',
             name: 'contributions',
         },
         {
+            type: 'input',
+            message: 'Enter your GitHub user name:',
+            name: 'github',
+        },
+        {
+            type: 'input',
+            message: 'Enter your email address:',
+            name: 'email',
+        },
+        {
             type: 'list',
-            message: 'What type of license would you like?',
+            message: 'The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/):',
             name: 'license',
-            choices: ['MIT', 'GPLv2', 'GPLv3', 'Apache', 'BSD 2-clause', 'BSD 3-clause', 'LGPLv3', 'AGPLv3', 'No License']
+            choices: Object.keys(licenses),
         },
        ]
+
+
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
@@ -59,80 +80,30 @@ function writeToFile(fileName, data) {
         console.log(err)
 });
 }
-    // ## Description
-    
-    // Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-    
-    // - What was your motivation?
-    // - Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-    // - What problem does it solve?
-    // - What did you learn?
-    
-    
-    // ## Installation
-    
-    // What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-    
-    // ## Usage
-    
-    // Provide instructions and examples for use. Include screenshots as needed.
-    
-    // To add a screenshot, create an "assets/images" folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-    
-    //     "md
-    //     ![alt text](assets/images/screenshot.png)"
-        
-    
-    // ## Credits
-    
-    // List your collaborators, if any, with links to their GitHub profiles.
-    
-    // If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-    
-    // If you followed tutorials, include links to those here as well.
-    
-    // ## License
-    
-    // The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-    
-    // ---
-    
-    // 🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-    
-    // ## Badges
-    
-    // ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-    
-    // Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-    
-    // ## Features
-    
-    // If your project has a lot of features, list them here.
-    
-    // ## How to Contribute
-    
-    // If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-    // `)
-
+  
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
-    .then((response) => {
-        console.log(response);
-        console.log(generateMarkdown(response));
+    .then((data) => {
+        console.log(data);
+        var userLicense = licenses[data.license];
+        var readMeContent = 
+            
+             `# ${data.title} ${userLicense}\n## Description\n${data.description}\n## Installation\n${data.install}\n## Usage\n${data.usage}\n## Credits\n${data.collab}\n## Tutorials\n${data.tutorials}\n---\n## How to Contribute\n${data.contributions}\n## Contact Me\n${data.github}\n${data.email}
+            `
+          
+              ;
+          
         
-        console.log('126 ' + JSON.stringify(response));
-        var readMeContent = generateMarkdown(response);
-        console.log(readMeContent);
-        writeToFile("README.md", readMeContent);
-        })
+        fs.writeFile("README.md", readMeContent,
+        (err) =>
+        err ? console.error(err) : console.log('README Generated!'))
+    })
+        }
         
-    }
-    // .then((data) => {
-    //     writeToFile(data);
-    // })
-    // writeToFile();
+    
+ 
  
 
 // Function call to initialize app
